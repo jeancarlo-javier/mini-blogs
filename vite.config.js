@@ -7,13 +7,6 @@ dotenv.config()
 
 export default defineConfig({
   plugins: [vuePlugin()],
-  define: {
-    'process.env': {
-      VITE_BACKEND_URL: {
-        VITE_BACKEND_URL: JSON.stringify(process.env.VITE_BACKEND_URL)
-      }
-    }
-  },
   server: {
     proxy: {
       '/api': {
