@@ -6,6 +6,7 @@ import { getLocalAuth } from './users'
 //     ? '/api'
 //     : import.meta.env.VITE_BACKEND_URL
 const apiUrl = import.meta.env.VITE_BACKEND_URL
+// console.log(apiUrl)
 
 export async function fetchPosts(): Promise<Post[] | null> {
   const response = await fetch(`${apiUrl}/posts`, {
@@ -13,8 +14,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${getLocalAuth()}`
-    },
-    credentials: 'include'
+    }
   })
 
   if (response.status !== 200) {
@@ -44,8 +44,7 @@ export async function createPost(post: PostCreate): Promise<Post | null> {
       'Content-Type': 'application/json',
       Authorization: `Basic ${getLocalAuth()}`
     },
-    body: JSON.stringify(post),
-    credentials: 'include'
+    body: JSON.stringify(post)
   })
 
   if (response.status !== 200) return null
