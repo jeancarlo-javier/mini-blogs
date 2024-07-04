@@ -1,10 +1,11 @@
 import type { Post, PostCreate, UnprocessedPost } from '../types/postTypes'
 import { getLocalAuth } from './users'
 
-const apiUrl =
-  import.meta.env.VITE_ENV === 'development'
-    ? '/api'
-    : import.meta.env.VITE_BACKEND_URL
+// const apiUrl =
+//   import.meta.env.VITE_ENV === 'development'
+//     ? '/api'
+//     : import.meta.env.VITE_BACKEND_URL
+const apiUrl = import.meta.env.VITE_BACKEND_URL
 
 export async function fetchPosts(): Promise<Post[] | null> {
   const response = await fetch(`${apiUrl}/posts`, {
