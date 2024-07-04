@@ -6,6 +6,8 @@ const apiUrl =
     ? '/api'
     : import.meta.env.VITE_BACKEND_URL
 
+console.log(apiUrl)
+
 export async function fetchPosts(): Promise<Post[] | null> {
   const response = await fetch(`${apiUrl}/posts`, {
     method: 'GET',

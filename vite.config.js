@@ -9,5 +9,14 @@ export default defineConfig({
   plugins: [vuePlugin()],
   define: {
     'process.env': process.env
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.VITE_BACKEND_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })
