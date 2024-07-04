@@ -34,12 +34,13 @@ export async function authUser(
 
   if (!encodedCredentials) return null
 
-  const response = await fetch(`${apiUrl}/auth/me`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/me`, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${encodedCredentials}`,
       'Content-Type': 'application/json'
-    }
+    },
+    credentials: 'include'
   })
 
   if (response.status !== 200) {

@@ -6,15 +6,14 @@ const apiUrl =
     ? '/api'
     : import.meta.env.VITE_BACKEND_URL
 
-console.log(apiUrl)
-
 export async function fetchPosts(): Promise<Post[] | null> {
   const response = await fetch(`${apiUrl}/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${getLocalAuth()}`
-    }
+    },
+    credentials: 'include'
   })
 
   if (response.status !== 200) {
@@ -44,7 +43,8 @@ export async function createPost(post: PostCreate): Promise<Post | null> {
       'Content-Type': 'application/json',
       Authorization: `Basic ${getLocalAuth()}`
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(post),
+    credentials: 'include'
   })
 
   if (response.status !== 200) return null
