@@ -1,8 +1,13 @@
 import type { Post, PostCreate, UnprocessedPost } from '../types/postTypes'
 import { getLocalAuth } from './users'
 
+const apiUrl =
+  import.meta.env.VITE_ENV === 'development'
+    ? '/api'
+    : import.meta.env.VITE_BACKEND_URL
+
 export async function fetchPosts(): Promise<Post[] | null> {
-  const response = await fetch('/api/posts', {
+  const response = await fetch(`${apiUrl}/posts`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -31,7 +36,7 @@ export async function fetchPosts(): Promise<Post[] | null> {
 }
 
 export async function createPost(post: PostCreate): Promise<Post | null> {
-  const response = await fetch('/api/create-post', {
+  const response = await fetch(`${apiUrl}/create-post`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

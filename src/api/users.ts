@@ -1,6 +1,11 @@
 import type { User, UserCreate } from '../types/userTypes'
 import type { UserCredentials } from '../types/userTypes'
 
+const apiUrl =
+  import.meta.env.VITE_ENV === 'development'
+    ? '/api'
+    : import.meta.env.VITE_BACKEND_URL
+
 export function getLocalAuth(): string | null {
   return localStorage.getItem('auth')
 }
@@ -29,7 +34,7 @@ export async function authUser(
 
   if (!encodedCredentials) return null
 
-  const response = await fetch('/api/auth/me', {
+  const response = await fetch(`${apiUrl}/auth/me`, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${encodedCredentials}`,
@@ -56,7 +61,7 @@ export async function authUser(
 export async function registerUser(user: UserCreate): Promise<User | null> {
   console.log('registerUser', user)
 
-  const response = await fetch('/api/create-user', {
+  const response = await fetch(`${apiUrl}/create-user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
