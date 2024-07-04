@@ -30,6 +30,8 @@ provide('posts', store.posts)
 provide('loading', loading)
 
 onMounted(async () => {
+  console.log('App mounted')
+
   const user: User | null = await authUser()
 
   setUser(user)
